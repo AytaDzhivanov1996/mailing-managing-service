@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ad2f66f-05da-4217-9c12-7f3a7c8fbea7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hw_4/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw_4/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hw_7/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw_7/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hw_7/hw7_classes_task2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hw_7/hw7_classes_task2.py" afterDir="false" />
@@ -23,7 +24,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -69,7 +70,7 @@
       <workItem from="1675001447753" duration="4250000" />
       <workItem from="1675007826148" duration="4281000" />
       <workItem from="1675015440448" duration="4024000" />
-      <workItem from="1675070719976" duration="9809000" />
+      <workItem from="1675070719976" duration="10478000" />
     </task>
     <servers />
   </component>
