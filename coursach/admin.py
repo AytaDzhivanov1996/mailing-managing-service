@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from coursach.models import Client, Mailing, Letter
+
+admin.site.register(Client)
+admin.site.register(Mailing)
+admin.site.register(Letter)

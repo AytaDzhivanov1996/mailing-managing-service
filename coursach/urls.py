@@ -1,14 +1,17 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from coursach.apps import CoursachConfig
 from coursach.views import ClientListView, ClientCreateView, ClientUpdateView, ClientDeleteView, ClientDetailView, \
     MailingListView, MailingCreateView, MailingUpdateView, MailingDeleteView, MailingDetailView, LetterListView, \
-    LetterCreateView, LetterUpdateView, LetterDeleteView, LetterDetailView, client_mailing, stats
+    LetterCreateView, LetterUpdateView, LetterDeleteView, LetterDetailView, client_mailing, stats, HomePageView, \
+    turn_off_mailing
 
 app_name = CoursachConfig.name
 
 urlpatterns = [
-    path('', ClientListView.as_view(), name='coursach'),
+    path('', cache_page(60)(HomePageView.as_view()), name='home'),
+    path('client_list/', ClientListView.as_view(), name='client_list'),
     path('create_client/', ClientCreateView.as_view(), name='create_client'),
     path('update_client/<int:pk>/', ClientUpdateView.as_view(), name='update_client'),
     path('delete_client/<int:pk>/', ClientDeleteView.as_view(), name='delete_client'),
@@ -24,5 +27,6 @@ urlpatterns = [
     path('delete_letter/<int:pk>/', LetterDeleteView.as_view(), name='delete_letter'),
     path('detail_letter/<int:pk>/', LetterDetailView.as_view(), name='detail_letter'),
     path('client_mailing/', client_mailing, name='status'),
-    path('stats/', stats, name='stats')
+    path('stats/', stats, name='stats'),
+    path('deactivate_mailing/<int:pk>', turn_off_mailing, name='deactivate')
 ]

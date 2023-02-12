@@ -7,7 +7,7 @@ from coursach.models import Mailing, MailingTry
 
 
 def client_mailing(**kwargs):
-    mailing_items = Mailing.objects.all()
+    mailing_items = Mailing.objects.filter(created_user=id)
     for item in mailing_items:
         if (
                 item.mailing_status == Mailing.STATUS_CREATED or item.mailing_status == Mailing.STATUS_LAUNCHED) and item.start_date == datetime.date.today() and item.end_date >= datetime.date.today() and item.time_of_mailing >= datetime.datetime.now().time():

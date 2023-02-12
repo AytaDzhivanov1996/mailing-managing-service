@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils.datetime_safe import date
 
@@ -5,9 +6,14 @@ from django.utils.datetime_safe import date
 class Client(models.Model):
     NULLABLE = {'blank': True, 'null': True}
 
+    created_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь',
+                                     **NULLABLE)
     email = models.EmailField(max_length=250, verbose_name='контактный e-mail')
     full_name = models.CharField(max_length=250, verbose_name='фио')
     comment = models.TextField(verbose_name='комментарий', **NULLABLE)
+
+    def __str__(self):
+        return f'{self.full_name}'
 
 
 class Mailing(models.Model):
@@ -24,12 +30,16 @@ class Mailing(models.Model):
     STATUS_COMPLETED = 'completed'
     STATUS_CREATED = 'created'
     STATUS_LAUNCHED = 'launched'
+    STATUS_DEACTIVATED = 'deactivated'
     STATUSES = (
         ('completed', 'завершена'),
         ('created', 'создана'),
-        ('launched', 'запущена')
+        ('launched', 'запущена'),
+        ('deactivated', 'деактивирована')
     )
 
+    created_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь',
+                                     **NULLABLE)
     client = models.ForeignKey('coursach.Client', verbose_name='Клиент', on_delete=models.SET_NULL, null=True)
     message = models.ForeignKey('coursach.Letter', verbose_name='Сообщение', on_delete=models.SET_NULL, null=True)
     time_of_mailing = models.TimeField(verbose_name='Время рассылки', **NULLABLE)
@@ -40,12 +50,23 @@ class Mailing(models.Model):
     start_date = models.DateField(default=date.today, verbose_name='Начальная дата')
     end_date = models.DateField(default=date.today, verbose_name='Конечная дата')
 
+    class Meta:
+        permissions = [
+            ('deactivate',
+             'Can deactivate mailing')
+        ]
+
 
 class Letter(models.Model):
     NULLABLE = {'blank': True, 'null': True}
 
+    created_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь',
+                                     **NULLABLE)
     letter_topic = models.CharField(max_length=350, verbose_name='Тема письма')
     letter_body = models.TextField(verbose_name='Тело письма')
+
+    def __str__(self):
+        return f'{self.letter_topic}'
 
 
 class MailingTry(models.Model):
