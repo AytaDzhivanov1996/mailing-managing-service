@@ -1,5 +1,5 @@
-/env_cw
+env
 *.pyc
 __pycache_
-/.idea
+.idea
 .env
